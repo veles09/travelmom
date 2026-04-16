@@ -34,3 +34,25 @@ nav button[variant="ghost"] {
 nav [class*="text-gray"] {
   color: #374151 !important;
 }
+
+/* Исправление работы чек-боксов */
+input[type="checkbox"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Убедимся, что чек-боксы не перекрыты другими элементами */
+label:has(input[type="checkbox"]),
+div:has(input[type="checkbox"]) {
+  z-index: 10;
+  position: relative;
+}
+
+/* Снятие pointer-events: none с родительских элементов чек-боксов */
+[class*="checkbox"] {
+  pointer-events: auto !important;
+}
+
+[class*="checkbox"] > * {
+  pointer-events: auto !important;
+}
