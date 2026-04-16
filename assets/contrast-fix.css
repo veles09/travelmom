@@ -1,0 +1,36 @@
+/* Исправление контраста меню */
+nav.fixed {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Улучшение видимости ссылок в меню */
+nav a {
+  color: #1f2937 !important;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #059669 !important;
+}
+
+/* Активная ссылка в меню */
+nav a[class*="bg-green-500"] {
+  color: #ffffff !important;
+}
+
+/* Логотип */
+nav .font-bold.text-xl {
+  color: #111827 !important;
+}
+
+/* Мобильное меню */
+nav button[variant="ghost"] {
+  color: #1f2937 !important;
+}
+
+/* Улучшение контраста для всех элементов навигации */
+nav [class*="text-gray"] {
+  color: #374151 !important;
+}
