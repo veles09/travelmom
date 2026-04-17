@@ -3,7 +3,7 @@ import type { ChatMessage, ChatSession, TourOption } from '@/types';
 import { useLocalStorage } from './useLocalStorage';
 import { generateId } from '@/lib/utils';
 
-const generateMockResponse = (_messageContent: string): { message: string; tours: TourOption[] } => {
+const generateMockResponse = (): { message: string; tours: TourOption[] } => {
   const responses = [
     {
       message: `Отлично! Я подобрал для вас несколько вариантов отдыха с детьми. Все отели имеют хорошие отзывы от семей с детьми аналогичного возраста.`,
@@ -106,7 +106,7 @@ export function useChat() {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    const response = generateMockResponse(content);
+    const response = generateMockResponse();
     
     const assistantMessage: ChatMessage = {
       id: generateId(),
