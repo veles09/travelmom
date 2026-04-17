@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { 
   Send, 
   Plus, 
@@ -92,29 +92,7 @@ export function ChatPage() {
 
   const currentSession = sessions.find(s => s.id === currentSessionId);
 
-  useEffect(() => {
-    localStorage.setItem('travelmom-chat-sessions', JSON.stringify(sessions));
-  }, [sessions]);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [currentSession?.messages]);
-
-  // Load quick start data if exists
-  useEffect(() => {
-    const quickStart = localStorage.getItem('travelmom-quick-start');
-    if (quickStart && sessions.length === 0) {
-      const data = JSON.parse(quickStart);
-      const initialMessage = `Привет! Я ищу тур ${data.destination ? `в ${data.destination}` : ''} ${data.dates ? `на ${data.dates}` : ''} ${data.childrenCount ? `с ${data.childrenCount} ${data.childrenCount === '1' ? 'ребенком' : 'детьми'}` : ''} ${data.childrenAges ? `(${data.childrenAges})` : ''} ${data.budget ? `, бюджет ${data.budget}` : ''}. Помоги подобрать варианты.`;
-      
-      createNewSession();
-      handleSendMessage(initialMessage);
-      localStorage.removeItem('travelmom-quick-start');
-    } else if (sessions.length === 0) {
-      createNewSession();
-    }
-  }, []);
-
+  // Helper functions defined first to avoid hoisting issues
   const createNewSession = () => {
     const newSession: Session = {
       id: generateId(),
@@ -201,67 +179,106 @@ export function ChatPage() {
     });
   };
 
-  // Sidebar content
-  const SidebarContent = () => (
-    <div className="flex flex-col h-full">
-      <div className="p-4">
-        <Button 
-          onClick={createNewSession}
-          className="w-full bg-rose-500 hover:bg-rose-600 text-white rounded-xl"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Новый чат
-        </Button>
-      </div>
-      
-      <ScrollArea className="flex-1 px-3">
-        <div className="space-y-1">
-          {sessions.map((session) => (
-            <div
-              key={session.id}
-              onClick={() => {
-                setCurrentSessionId(session.id);
-                setIsSidebarOpen(false);
-              }}
-              className={`group flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-all ${
-                currentSessionId === session.id
-                  ? 'bg-rose-100 text-rose-700'
-                  : 'hover:bg-gray-100 text-gray-700'
-              }`}
-            >
-              <MessageSquare className="w-4 h-4 flex-shrink-0" />
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium truncate">{session.title}</div>
-                <div className="text-xs opacity-70">{formatDate(session.updatedAt)}</div>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteSession(session.id);
-                }}
-                className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 hover:text-red-600 rounded transition-all"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
-        </div>
-      </ScrollArea>
-    </div>
-  );
-
   return (
     <div className="h-screen flex flex-col lg:flex-row bg-gray-50 pt-16 lg:pt-20">
       {/* Mobile Sidebar */}
       <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
         <SheetContent side="left" className="w-[280px] p-0">
-          <SidebarContent />
+          <div className="flex flex-col h-full">
+        <div className="p-4">
+          <Button 
+            onClick={createNewSession}
+            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Новый чат
+          </Button>
+        </div>
+        
+        <ScrollArea className="flex-1 px-3">
+          <div className="space-y-1">
+            {sessions.map((session) => (
+              <div
+                key={session.id}
+                onClick={() => {
+                  setCurrentSessionId(session.id);
+                  setIsSidebarOpen(false);
+                }}
+                className={`group flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-all ${
+                  currentSessionId === session.id
+                    ? 'bg-emerald-100 text-emerald-700'
+                    : 'hover:bg-gray-100 text-gray-700'
+                }`}
+              >
+                <MessageSquare className="w-4 h-4 flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-medium truncate">{session.title}</div>
+                  <div className="text-xs opacity-70">{formatDate(session.updatedAt)}</div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteSession(session.id);
+                  }}
+                  className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 hover:text-red-600 rounded transition-all"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
         </SheetContent>
       </Sheet>
 
       {/* Desktop Sidebar */}
       <div className="hidden lg:block w-72 bg-white border-r border-gray-200">
-        <SidebarContent />
+        <div className="flex flex-col h-full">
+        <div className="p-4">
+          <Button 
+            onClick={createNewSession}
+            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Новый чат
+          </Button>
+        </div>
+        
+        <ScrollArea className="flex-1 px-3">
+          <div className="space-y-1">
+            {sessions.map((session) => (
+              <div
+                key={session.id}
+                onClick={() => {
+                  setCurrentSessionId(session.id);
+                  setIsSidebarOpen(false);
+                }}
+                className={`group flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer transition-all ${
+                  currentSessionId === session.id
+                    ? 'bg-emerald-100 text-emerald-700'
+                    : 'hover:bg-gray-100 text-gray-700'
+                }`}
+              >
+                <MessageSquare className="w-4 h-4 flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-medium truncate">{session.title}</div>
+                  <div className="text-xs opacity-70">{formatDate(session.updatedAt)}</div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteSession(session.id);
+                  }}
+                  className="opacity-0 group-hover:opacity-100 p-1 hover:bg-red-100 hover:text-red-600 rounded transition-all"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
       </div>
 
       {/* Chat Area */}
