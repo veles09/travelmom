@@ -96,7 +96,7 @@ export function BlogPage() {
                   </div>
                   <CardContent className="p-5">
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                      <Badge className="bg-green-100 text-green-600 hover:bg-green-100">
+                      <Badge className="bg-green-100 text-gray-900 hover:bg-green-100">
                         {post.category}
                       </Badge>
                       <span>•</span>
@@ -105,7 +105,7 @@ export function BlogPage() {
                         {post.readTime}
                       </div>
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-500 transition-colors">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-gray-700 transition-colors">
                       {post.title}
                     </h3>
                     <p className="text-sm text-gray-600 line-clamp-2 mb-4">{post.excerpt}</p>
