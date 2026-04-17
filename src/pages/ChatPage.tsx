@@ -302,7 +302,7 @@ export function ChatPage() {
                 <div
                   className={`max-w-[85%] sm:max-w-[75%] rounded-2xl px-4 py-3 ${
                     message.role === 'user'
-                      ? 'bg-rose-500 text-white'
+                      ? 'bg-green-500 text-white'
                       : 'bg-white shadow-sm border border-gray-100'
                   }`}
                 >
@@ -341,7 +341,7 @@ export function ChatPage() {
             <Button 
               onClick={() => handleSendMessage()}
               disabled={isLoading || !input.trim()}
-              className="h-12 w-12 bg-rose-500 hover:bg-rose-600 rounded-xl p-0"
+              className="h-12 w-12 bg-green-500 hover:bg-green-600 rounded-xl p-0"
             >
               <Send className="w-5 h-5" />
             </Button>
@@ -356,7 +356,7 @@ export function ChatPage() {
       <div className="hidden xl:block w-96 bg-white border-l border-gray-200 overflow-hidden">
         <div className="p-4 border-b">
           <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-rose-500" />
+            <Sparkles className="w-5 h-5 text-green-500" />
             Подобранные варианты
           </h3>
         </div>
@@ -397,7 +397,7 @@ export function ChatPage() {
                       {tour.features.slice(0, 3).map((feature, i) => (
                         <span 
                           key={i}
-                          className="text-xs bg-rose-50 text-rose-600 px-2 py-1 rounded-full"
+                          className="text-xs bg-green-50 text-green-600 px-2 py-1 rounded-full"
                         >
                           {feature}
                         </span>
@@ -408,12 +408,12 @@ export function ChatPage() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-2xl font-bold text-rose-500">
+                        <span className="text-2xl font-bold text-green-500">
                           {tour.price.toLocaleString()} {tour.currency}
                         </span>
                         <span className="text-sm text-gray-400">/неделя</span>
                       </div>
-                      <Button size="sm" className="bg-rose-500 hover:bg-rose-600 rounded-lg">
+                      <Button size="sm" className="bg-green-500 hover:bg-green-600 rounded-lg">
                         Подробнее
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </Button>

@@ -38,13 +38,13 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-400 to-rose-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
               <span className="text-white font-bold text-lg">M</span>
             </div>
             <span className={`font-bold text-xl transition-colors ${
               isScrolled ? 'text-gray-900' : 'text-gray-900 lg:text-white'
             }`}>
-              TravelMom<span className="text-rose-500">.ai</span>
+              TravelMom<span className="text-green-500">.ai</span>
             </span>
           </Link>
 
@@ -56,7 +56,7 @@ export function Navbar() {
                 to={item.path}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   isActive(item.path)
-                    ? 'bg-rose-500 text-white'
+                    ? 'bg-green-500 text-white'
                     : isScrolled
                     ? 'text-gray-700 hover:bg-gray-100'
                     : 'text-white/90 hover:bg-white/20 hover:text-white'
@@ -71,7 +71,7 @@ export function Navbar() {
           <div className="hidden lg:block">
             <Link to="/chat">
               <Button 
-                className="bg-rose-500 hover:bg-rose-600 text-white rounded-full px-6"
+                className="bg-green-500 hover:bg-green-600 text-white rounded-full px-6"
               >
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Подобрать тур
@@ -89,11 +89,11 @@ export function Navbar() {
             <SheetContent side="right" className="w-[300px] bg-white">
               <div className="flex flex-col gap-6 mt-8">
                 <Link to="/" className="flex items-center gap-2 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-400 to-rose-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
                     <span className="text-white font-bold text-lg">M</span>
                   </div>
                   <span className="font-bold text-xl text-gray-900">
-                    TravelMom<span className="text-rose-500">.ai</span>
+                    TravelMom<span className="text-green-500">.ai</span>
                   </span>
                 </Link>
                 
@@ -104,7 +104,7 @@ export function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all ${
                       isActive(item.path)
-                        ? 'bg-rose-50 text-rose-600'
+                        ? 'bg-green-50 text-green-600'
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
@@ -114,7 +114,7 @@ export function Navbar() {
                 ))}
                 
                 <Link to="/chat" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full bg-rose-500 hover:bg-rose-600 text-white rounded-xl mt-4">
+                  <Button className="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl mt-4">
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Подобрать тур
                   </Button>

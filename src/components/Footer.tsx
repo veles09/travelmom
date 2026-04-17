@@ -28,11 +28,11 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-400 to-rose-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">M</span>
               </div>
               <span className="font-bold text-xl">
-                TravelMom<span className="text-rose-400">.ai</span>
+                TravelMom<span className="text-green-400">.ai</span>
               </span>
             </Link>
             <p className="text-gray-400 text-sm mb-6">
@@ -44,7 +44,7 @@ export function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-rose-500 transition-colors"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-colors"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -52,13 +52,13 @@ export function Footer() {
                 href="https://t.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-rose-500 transition-colors"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-colors"
               >
                 <Send className="w-5 h-5" />
               </a>
               <a
                 href="mailto:hello@travelmom.ai"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-rose-500 transition-colors"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition-colors"
               >
                 <Mail className="w-5 h-5" />
               </a>
@@ -73,7 +73,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-rose-400 transition-colors text-sm"
+                    className="text-gray-400 hover:text-green-400 transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -90,7 +90,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-rose-400 transition-colors text-sm"
+                    className="text-gray-400 hover:text-green-400 transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -107,7 +107,7 @@ export function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-gray-400 hover:text-rose-400 transition-colors text-sm"
+                    className="text-gray-400 hover:text-green-400 transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
