@@ -58,7 +58,7 @@ export function Navbar() {
                   isActive(item.path)
                     ? 'bg-green-500 text-white'
                     : isScrolled
-                    ? 'text-gray-700 hover:bg-gray-100'
+                    ? 'text-gray-900 hover:bg-gray-100'
                     : 'text-white/90 hover:bg-white/20 hover:text-white'
                 }`}
               >
@@ -82,7 +82,7 @@ export function Navbar() {
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className={isScrolled ? '' : 'text-gray-900'}>
+              <Button variant="ghost" size="icon" className={`transition-colors ${isScrolled ? 'text-gray-900 hover:bg-gray-100' : 'text-gray-900 hover:bg-white/20'}`}>
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
