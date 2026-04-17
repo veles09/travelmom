@@ -51,7 +51,7 @@ export function BlogPostPage() {
         <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-8">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap gap-2 mb-4">
-              <Badge className="bg-rose-500 text-white">{post.category}</Badge>
+              <Badge className="bg-green-500 text-white">{post.category}</Badge>
               <Badge className="bg-white/20 text-white backdrop-blur-sm flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 {post.readTime}
@@ -132,7 +132,7 @@ export function BlogPostPage() {
             </Card>
 
             {/* CTA */}
-            <div className="mt-8 bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-6 lg:p-8 text-white text-center">
+            <div className="mt-8 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 lg:p-8 text-white text-center">
               <h3 className="text-xl font-bold mb-2">
                 Нужна помощь с планированием?
               </h3>
@@ -140,7 +140,7 @@ export function BlogPostPage() {
                 AI-консультант ответит на ваши вопросы и подберет идеальный вариант
               </p>
               <Link to="/chat">
-                <Button className="bg-white text-rose-500 hover:bg-gray-100 rounded-full">
+                <Button className="bg-white text-green-500 hover:bg-gray-100 rounded-full">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Задать вопрос AI
                 </Button>
@@ -156,14 +156,14 @@ export function BlogPostPage() {
                 <h3 className="font-semibold text-gray-900 mb-4">О статье</h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <Tag className="w-5 h-5 text-rose-500" />
+                    <Tag className="w-5 h-5 text-green-500" />
                     <div>
                       <div className="text-sm text-gray-500">Категория</div>
                       <div className="font-medium">{post.category}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="w-5 h-5 text-rose-500" />
+                    <Clock className="w-5 h-5 text-green-500" />
                     <div>
                       <div className="text-sm text-gray-500">Время чтения</div>
                       <div className="font-medium">{post.readTime}</div>
@@ -199,7 +199,7 @@ export function BlogPostPage() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                           />
                         </div>
-                        <h4 className="font-medium text-gray-900 group-hover:text-rose-500 transition-colors line-clamp-2">
+                        <h4 className="font-medium text-gray-900 group-hover:text-green-500 transition-colors line-clamp-2">
                           {route.title}
                         </h4>
                       </Link>

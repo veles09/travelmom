@@ -33,7 +33,7 @@ export function RoutesPage() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24 lg:pt-28">
       {/* Hero */}
-      <div className="bg-gradient-to-br from-rose-500 to-rose-600 py-16 lg:py-24">
+      <div className="bg-gradient-to-br from-green-500 to-green-600 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
@@ -69,7 +69,7 @@ export function RoutesPage() {
                   onClick={() => setSelectedDestination(dest)}
                   className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                     selectedDestination === dest
-                      ? 'bg-rose-500 text-white'
+                      ? 'bg-green-500 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -88,7 +88,7 @@ export function RoutesPage() {
                 onClick={() => setSelectedAge(age)}
                 className={`px-3 py-1.5 rounded-full text-sm whitespace-nowrap transition-all ${
                   selectedAge === age
-                    ? 'bg-rose-100 text-rose-600'
+                    ? 'bg-green-100 text-green-600'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -129,7 +129,7 @@ export function RoutesPage() {
                       <MapPin className="w-4 h-4" />
                       {route.destination}
                     </div>
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-rose-500 transition-colors">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-500 transition-colors">
                       {route.title}
                     </h3>
                     <p className="text-sm text-gray-600 line-clamp-2 mb-4">{route.excerpt}</p>
@@ -169,7 +169,7 @@ export function RoutesPage() {
             AI-консультант поможет составить индивидуальный план путешествия под вашу семью
           </p>
           <Link to="/chat">
-            <Button size="lg" className="bg-rose-500 hover:bg-rose-600 text-white rounded-full">
+            <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white rounded-full">
               Подобрать индивидуально
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

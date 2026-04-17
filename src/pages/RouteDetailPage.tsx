@@ -51,7 +51,7 @@ export function RouteDetailPage() {
         <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-8">
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-wrap gap-2 mb-4">
-              <Badge className="bg-rose-500 text-white">{route.duration}</Badge>
+              <Badge className="bg-green-500 text-white">{route.duration}</Badge>
               {route.tags.map((tag, i) => (
                 <Badge key={i} className="bg-white/20 text-white backdrop-blur-sm">
                   {tag}
@@ -130,7 +130,7 @@ export function RouteDetailPage() {
             </Card>
 
             {/* CTA */}
-            <div className="mt-8 bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-6 lg:p-8 text-white text-center">
+            <div className="mt-8 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-6 lg:p-8 text-white text-center">
               <h3 className="text-xl font-bold mb-2">
                 Хотите похожий маршрут?
               </h3>
@@ -138,7 +138,7 @@ export function RouteDetailPage() {
                 AI подберет варианты специально для вашей семьи
               </p>
               <Link to="/chat">
-                <Button className="bg-white text-rose-500 hover:bg-gray-100 rounded-full">
+                <Button className="bg-white text-green-500 hover:bg-gray-100 rounded-full">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Подобрать похожий тур
                 </Button>
@@ -154,21 +154,21 @@ export function RouteDetailPage() {
                 <h3 className="font-semibold text-gray-900 mb-4">Краткая информация</h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-rose-500" />
+                    <MapPin className="w-5 h-5 text-green-500" />
                     <div>
                       <div className="text-sm text-gray-500">Направление</div>
                       <div className="font-medium">{route.destination}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-rose-500" />
+                    <Calendar className="w-5 h-5 text-green-500" />
                     <div>
                       <div className="text-sm text-gray-500">Длительность</div>
                       <div className="font-medium">{route.duration}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Users className="w-5 h-5 text-rose-500" />
+                    <Users className="w-5 h-5 text-green-500" />
                     <div>
                       <div className="text-sm text-gray-500">Возраст детей</div>
                       <div className="font-medium">{route.childAge}</div>
@@ -193,7 +193,7 @@ export function RouteDetailPage() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                           />
                         </div>
-                        <h4 className="font-medium text-gray-900 group-hover:text-rose-500 transition-colors line-clamp-2">
+                        <h4 className="font-medium text-gray-900 group-hover:text-green-500 transition-colors line-clamp-2">
                           {post.title}
                         </h4>
                       </Link>

@@ -106,13 +106,13 @@ export function HomePage() {
             {/* Left: Text */}
             <div className="text-white">
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                <Sparkles className="w-4 h-4 text-rose-400" />
+                <Sparkles className="w-4 h-4 text-green-400" />
                 <span className="text-sm font-medium">AI-планирование путешествий</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 AI подберет идеальное путешествие{' '}
-                <span className="text-rose-400">с детьми</span> за 2 минуты
+                <span className="text-green-400">с детьми</span> за 2 минуты
               </h1>
               
               <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-xl">
@@ -122,21 +122,21 @@ export function HomePage() {
 
               <div className="flex flex-wrap gap-4 mb-8">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-rose-400" />
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
                   <span className="text-sm">Бесплатно</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-rose-400" />
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
                   <span className="text-sm">Без регистрации</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-rose-400" />
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
                   <span className="text-sm">Мгновенный результат</span>
                 </div>
               </div>
 
               <Link to="/chat">
-                <Button size="lg" className="bg-rose-500 hover:bg-rose-600 text-white rounded-full px-8 text-lg">
+                <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white rounded-full px-8 text-lg">
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Начать подбор
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -225,7 +225,7 @@ export function HomePage() {
 
                 <Button 
                   type="submit" 
-                  className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-lg font-semibold"
+                  className="w-full h-14 bg-green-500 hover:bg-green-600 text-white rounded-xl text-lg font-semibold"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Подобрать тур
@@ -237,23 +237,23 @@ export function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-rose-50">
+      <section className="py-16 bg-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-rose-500 mb-2">500+</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">500+</div>
               <div className="text-gray-600">Семей отдохнули</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-rose-500 mb-2">50+</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">50+</div>
               <div className="text-gray-600">Направлений</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-rose-500 mb-2">2 мин</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">2 мин</div>
               <div className="text-gray-600">На подбор</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-rose-500 mb-2">4.9</div>
+              <div className="text-4xl font-bold text-green-500 mb-2">4.9</div>
               <div className="text-gray-600">Рейтинг сервиса</div>
             </div>
           </div>
@@ -277,8 +277,8 @@ export function HomePage() {
             {features.map((feature, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-rose-500" />
+                  <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
+                    <feature.icon className="w-6 h-6 text-green-500" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
                   <p className="text-gray-600">{feature.description}</p>
@@ -364,7 +364,7 @@ export function HomePage() {
                   </div>
                   <CardContent className="p-5">
                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                      <span className="bg-rose-100 text-rose-600 px-2 py-1 rounded-full text-xs">
+                      <span className="bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs">
                         {post.category}
                       </span>
                       <span>•</span>
@@ -381,7 +381,7 @@ export function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 lg:py-32 bg-gradient-to-br from-rose-500 to-rose-600">
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-green-500 to-green-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -431,7 +431,7 @@ export function HomePage() {
             для вашей семьи за пару минут
           </p>
           <Link to="/chat">
-            <Button size="lg" className="bg-rose-500 hover:bg-rose-600 text-white rounded-full px-8 text-lg">
+            <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white rounded-full px-8 text-lg">
               <MessageCircle className="w-5 h-5 mr-2" />
               Начать подбор
               <ArrowRight className="w-5 h-5 ml-2" />
