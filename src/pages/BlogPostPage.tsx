@@ -60,22 +60,10 @@ export function BlogPostPage() {
             <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-4 mb-4">
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag, i) => (
-                  <span key={i} className="text-white/70 text-sm">#{tag}</span>
-                ))}
-              </div>
-              <div className="flex items-center gap-2 ml-auto">
-                <Button variant="outline" size="sm" className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm">
-                  <Share2 className="w-4 h-4 mr-1" />
-                  Поделиться
-                </Button>
-                <Button variant="outline" size="sm" className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm">
-                  <Bookmark className="w-4 h-4 mr-1" />
-                  Сохранить
-                </Button>
-              </div>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag, i) => (
+                <span key={i} className="text-white/70 text-sm">#{tag}</span>
+              ))}
             </div>
           </div>
         </div>
@@ -158,6 +146,84 @@ export function BlogPostPage() {
                 </Button>
               </Link>
             </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Quick Info */}
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-gray-900 mb-4">О статье</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Tag className="w-5 h-5 text-green-500" />
+                    <div>
+                      <div className="text-sm text-gray-500">Категория</div>
+                      <div className="font-medium">{post.category}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-5 h-5 text-green-500" />
+                    <div>
+                      <div className="text-sm text-gray-500">Время чтения</div>
+                      <div className="font-medium">{post.readTime}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-4 pt-4 border-t">
+                  <div className="text-sm text-gray-500 mb-2">Теги:</div>
+                  <div className="flex flex-wrap gap-1">
+                    {post.tags.map((tag, i) => (
+                      <Badge key={i} variant="secondary" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Related Routes */}
+            {relatedRoutes.length > 0 && (
+              <Card className="border-0 shadow-lg">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-gray-900 mb-4">Похожие маршруты</h3>
+                  <div className="space-y-4">
+                    {relatedRoutes.map((route) => (
+                      <Link key={route.id} to={`/routes/${route.slug}`} className="block group">
+                        <div className="aspect-video rounded-lg overflow-hidden mb-2">
+                          <img
+                            src={route.image}
+                            alt={route.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                          />
+                        </div>
+                        <h4 className="font-medium text-gray-900 group-hover:text-green-500 transition-colors line-clamp-2">
+                          {route.title}
+                        </h4>
+                      </Link>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Actions */}
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex gap-2">
+                  <Button variant="outline" className="flex-1 rounded-xl">
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Поделиться
+                  </Button>
+                  <Button variant="outline" className="flex-1 rounded-xl">
+                    <Bookmark className="w-4 h-4 mr-2" />
+                    Сохранить
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
