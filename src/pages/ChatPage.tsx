@@ -12,6 +12,7 @@ import {
   Menu
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useChat } from '@/hooks/useChat';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,52 +21,8 @@ import type { TourOption, ChatSession } from '@/types';
 import { generateId } from '@/lib/utils';
 
 // Mock AI response generator
-const generateMockResponse = (userMessage: string): { message: string; tours: TourOption[] } => {
-  const destinations = ['Турция', 'Сочи', 'ОАЭ', 'Таиланд', 'Египет'];
-  const foundDestination = destinations.find(d => userMessage.toLowerCase().includes(d.toLowerCase())) || 'Турция';
-  
-  return {
-    message: `Отлично! Я подобрал для вас несколько вариантов отдыха в ${foundDestination} с детьми. Все отели имеют хорошие отзывы от семей с детьми аналогичного возраста, детские клубы и безопасные пляжи.`,
-    tours: [
-      {
-        id: generateId(),
-        name: 'Family Paradise Resort',
-        location: `${foundDestination}, побережье`,
-        price: Math.floor(Math.random() * 50000) + 60000,
-        currency: '₽',
-        image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400',
-        rating: 4.7 + Math.random() * 0.3,
-        reviews: Math.floor(Math.random() * 300) + 100,
-        features: ['Детский клуб', 'Аквапарк', 'Няни', 'All Inclusive'],
-        description: 'Семейный курорт с собственным пляжем и развлечениями для детей всех возрастов. Пологий вход в море.'
-      },
-      {
-        id: generateId(),
-        name: 'Kids Friendly Hotel',
-        location: `${foundDestination}, центр`,
-        price: Math.floor(Math.random() * 40000) + 50000,
-        currency: '₽',
-        image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400',
-        rating: 4.5 + Math.random() * 0.4,
-        reviews: Math.floor(Math.random() * 400) + 150,
-        features: ['Мини-зоопарк', 'Детские бассейны', 'Анимация', 'Family Room'],
-        description: 'Идеальный выбор для семей с маленькими детьми. Есть детское меню и круглосуточная няня.'
-      },
-      {
-        id: generateId(),
-        name: 'Sun & Beach Resort',
-        location: `${foundDestination}, курортная зона`,
-        price: Math.floor(Math.random() * 35000) + 45000,
-        currency: '₽',
-        image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400',
-        rating: 4.4 + Math.random() * 0.4,
-        reviews: Math.floor(Math.random() * 250) + 80,
-        features: ['Песчаный пляж', 'Игровые площадки', 'Семейные номера', 'SPA'],
-        description: 'Уютный отель с пологим входом в море и большой территорией для прогулок. Отличные отзывы от семей.'
-      }
-    ]
-  };
-};
+const { sendMessage, sessions, currentSessionId, isLoading } = useChat();
+
 
 interface Message {
   id: string;
@@ -121,56 +78,17 @@ export function ChatPage() {
 
   const handleSendMessage = async (messageText?: string) => {
     const text = messageText || input;
-    if (!text.trim() || !currentSessionId) return;
+    if (!text.trim()) return;
 
-    const userMessage: Message = {
-      id: generateId(),
-      role: 'user',
-      content: text,
-      timestamp: Date.now()
-    };
+    // Очищаем поле ввода
+    if (!messageText) setInput('');
 
-    setSessions(prev => prev.map(session => {
-      if (session.id === currentSessionId) {
-        return {
-          ...session,
-          messages: [...session.messages, userMessage],
-          title: session.title === 'Новый разговор' ? text.slice(0, 30) + '...' : session.title,
-          updatedAt: Date.now()
-        };
-      }
-      return session;
-    }));
-
-    setInput('');
-    setIsLoading(true);
-
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    const response = generateMockResponse(text);
-    
-    const assistantMessage: Message = {
-      id: generateId(),
-      role: 'assistant',
-      content: response.message,
-      timestamp: Date.now()
-    };
-
-    setSessions(prev => prev.map(session => {
-      if (session.id === currentSessionId) {
-        return {
-          ...session,
-          messages: [...session.messages, userMessage, assistantMessage],
-          updatedAt: Date.now()
-        };
-      }
-      return session;
-    }));
-
-    setCurrentTours(response.tours);
-    setIsLoading(false);
+    // Вызываем sendMessage из хука useChat (тот самый, что идет в Яндекс)
+    // Он сам обновит сессии и добавит сообщения на экран
+    await sendMessage(text);
   };
+
+
 
   const formatDate = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString('ru-RU', {
