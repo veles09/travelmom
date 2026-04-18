@@ -77,9 +77,11 @@ export function useChat() {
     }
   }, [setSessions, currentSessionId]);
 
-  const sendMessage = useCallback(async (content: string) => {
-    if (!currentSessionId) {
-      createNewSession();
+const sendMessage = useCallback(async (content: string) => {
+    // Определяем ID сессии (берем текущую или создаем новую)
+    let sessionId = currentSessionId;
+    if (!sessionId) {
+      sessionId = createNewSession();
     }
 
     const userMessage: ChatMessage = {
@@ -89,8 +91,9 @@ export function useChat() {
       timestamp: Date.now()
     };
 
+    // 1. Сразу отображаем сообщение пользователя в чате
     setSessions(prev => prev.map(session => {
-      if (session.id === currentSessionId) {
+      if (session.id === sessionId) {
         return {
           ...session,
           messages: [...session.messages, userMessage],
@@ -103,31 +106,50 @@ export function useChat() {
 
     setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // 2. Отправляем запрос к нашему API роуту (папка /api/chat)
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          // Передаем текущее сообщение
+          messages: [{ role: 'user', text: content }] 
+        }),
+      });
 
-    const response = generateMockResponse();
-    
-    const assistantMessage: ChatMessage = {
-      id: generateId(),
-      role: 'assistant',
-      content: response.message,
-      timestamp: Date.now()
-    };
+      if (!response.ok) throw new Error('Ошибка сервера');
+      
+      const data = await response.json();
 
-    setSessions(prev => prev.map(session => {
-      if (session.id === currentSessionId) {
-        return {
-          ...session,
-          messages: [...session.messages, userMessage, assistantMessage],
-          updatedAt: Date.now()
-        };
-      }
-      return session;
-    }));
+      // 3. Формируем ответ ассистента
+      const assistantMessage: ChatMessage = {
+        id: generateId(),
+        role: 'assistant',
+        content: data.text || "Извините, я не смог получить ответ.",
+        timestamp: Date.now()
+      };
 
-    setIsLoading(false);
-    return response.tours;
+      // 4. Добавляем ответ ИИ в историю сообщений
+      setSessions(prev => prev.map(session => {
+        if (session.id === sessionId) {
+          return {
+            ...session,
+            messages: [...session.messages, assistantMessage],
+            updatedAt: Date.now()
+          };
+        }
+        return session;
+      }));
+
+      // Пока возвращаем пустой массив туров (реальный поиск настроим позже)
+      return []; 
+
+    } catch (error) {
+      console.error("Ошибка при запросе к ИИ:", error);
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
   }, [currentSessionId, setSessions, createNewSession]);
 
   return {
