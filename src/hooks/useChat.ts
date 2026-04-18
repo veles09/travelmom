@@ -1,54 +1,9 @@
 import { useState, useCallback } from 'react';
-import type { ChatMessage, ChatSession, TourOption } from '@/types';
+import type { ChatMessage, ChatSession } from '@/types';
 import { useLocalStorage } from './useLocalStorage';
 import { generateId } from '@/lib/utils';
 
-const generateMockResponse = (): { message: string; tours: TourOption[] } => {
-  const responses = [
-    {
-      message: `Отлично! Я подобрал для вас несколько вариантов отдыха с детьми. Все отели имеют хорошие отзывы от семей с детьми аналогичного возраста.`,
-      tours: [
-        {
-          id: generateId(),
-          name: 'Family Resort & Spa',
-          location: 'Анталья, Турция',
-          price: 85000,
-          currency: '₽',
-          image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400',
-          rating: 4.8,
-          reviews: 324,
-          features: ['Детский клуб', 'Аквапарк', 'Няни'],
-          description: 'Семейный курорт с собственным пляжем и развлечениями для детей всех возрастов.'
-        },
-        {
-          id: generateId(),
-          name: 'Kids Paradise Hotel',
-          location: 'Белек, Турция',
-          price: 92000,
-          currency: '₽',
-          image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400',
-          rating: 4.9,
-          reviews: 512,
-          features: ['Мини-зоопарк', 'Детские бассейны', 'Анимация'],
-          description: 'Идеальный выбор для семей с маленькими детьми. Есть детское меню и круглосуточная няня.'
-        },
-        {
-          id: generateId(),
-          name: 'Sun & Fun Resort',
-          location: 'Сиде, Турция',
-          price: 78000,
-          currency: '₽',
-          image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400',
-          rating: 4.6,
-          reviews: 189,
-          features: ['Песчаный пляж', 'Игровые площадки', 'Семейные номера'],
-          description: 'Уютный отель с пологим входом в море и большой территорией для прогулок.'
-        }
-      ]
-    }
-  ];
-  return responses[0];
-};
+
 
 export function useChat() {
   const [sessions, setSessions] = useLocalStorage<ChatSession[]>('travelmom-chat-sessions', []);
