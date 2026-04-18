@@ -145,30 +145,63 @@ export function ChatPage() {
     setInput('');
     setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Отправляем запрос на наш API сервер
+      const response = await fetch('http://localhost:3001/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: text })
+      });
 
-    const response = generateMockResponse(text);
-    
-    const assistantMessage: Message = {
-      id: generateId(),
-      role: 'assistant',
-      content: response.message,
-      timestamp: Date.now()
-    };
-
-    setSessions(prev => prev.map(session => {
-      if (session.id === currentSessionId) {
-        return {
-          ...session,
-          messages: [...session.messages, userMessage, assistantMessage],
-          updatedAt: Date.now()
-        };
+      if (!response.ok) {
+        throw new Error('Ошибка сети');
       }
-      return session;
-    }));
 
-    setCurrentTours(response.tours);
+      const data = await response.json();
+      
+      const assistantMessage: Message = {
+        id: generateId(),
+        role: 'assistant',
+        content: data.response,
+        timestamp: Date.now()
+      };
+
+      setSessions(prev => prev.map(session => {
+        if (session.id === currentSessionId) {
+          return {
+            ...session,
+            messages: [...session.messages, userMessage, assistantMessage],
+            updatedAt: Date.now()
+          };
+        }
+        return session;
+      }));
+
+      setCurrentTours(data.tours || []);
+    } catch (error) {
+      console.error('Ошибка при отправке сообщения:', error);
+      // В случае ошибки показываем сообщение пользователю
+      const errorMessage: Message = {
+        id: generateId(),
+        role: 'assistant',
+        content: 'Извините, произошла ошибка при обработке вашего запроса. Пожалуйста, попробуйте позже.',
+        timestamp: Date.now()
+      };
+
+      setSessions(prev => prev.map(session => {
+        if (session.id === currentSessionId) {
+          return {
+            ...session,
+            messages: [...session.messages, userMessage, errorMessage],
+            updatedAt: Date.now()
+          };
+        }
+        return session;
+      }));
+    }
+
     setIsLoading(false);
   };
 
