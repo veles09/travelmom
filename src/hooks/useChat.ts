@@ -103,32 +103,89 @@ export function useChat() {
 
     setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Форматируем сообщения для Yandex API
+      const yandexMessages = sessions
+        .find(s => s.id === currentSessionId)?.messages
+        .concat(userMessage)
+        .map(msg => ({
+          role: msg.role === 'assistant' ? 'assistant' : 'user',
+          text: msg.content
+        })) || [];
 
-    const response = generateMockResponse();
-    
-    const assistantMessage: ChatMessage = {
-      id: generateId(),
-      role: 'assistant',
-      content: response.message,
-      timestamp: Date.now()
-    };
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: yandexMessages
+        }),
+      });
 
-    setSessions(prev => prev.map(session => {
-      if (session.id === currentSessionId) {
-        return {
-          ...session,
-          messages: [...session.messages, userMessage, assistantMessage],
-          updatedAt: Date.now()
-        };
+      if (!response.ok) {
+        throw new Error('Failed to get response from server');
       }
-      return session;
-    }));
 
-    setIsLoading(false);
-    return response.tours;
-  }, [currentSessionId, setSessions, createNewSession]);
+      const data = await response.json();
+      
+      // Извлекаем текст ответа из формата Yandex
+      let assistantContent = '';
+      if (data.result?.alternatives?.[0]?.message?.role === 'assistant') {
+        assistantContent = data.result.alternatives[0].message.text || '';
+      } else if (data.result?.alternatives?.[0]?.text) {
+        assistantContent = data.result.alternatives[0].text;
+      } else {
+        assistantContent = 'Извините, не удалось получить ответ.';
+      }
+
+      const assistantMessage: ChatMessage = {
+        id: generateId(),
+        role: 'assistant',
+        content: assistantContent,
+        timestamp: Date.now()
+      };
+
+      setSessions(prev => prev.map(session => {
+        if (session.id === currentSessionId) {
+          return {
+            ...session,
+            messages: [...session.messages, userMessage, assistantMessage],
+            updatedAt: Date.now()
+          };
+        }
+        return session;
+      }));
+
+      // Возвращаем пустой массив туров (можно доработать парсинг ответов Yandex)
+      return [];
+    } catch (error) {
+      console.error('Chat error:', error);
+      
+      // При ошибке добавляем сообщение об ошибке
+      const errorMessage: ChatMessage = {
+        id: generateId(),
+        role: 'assistant',
+        content: 'Произошла ошибка при получении ответа. Пожалуйста, попробуйте позже.',
+        timestamp: Date.now()
+      };
+
+      setSessions(prev => prev.map(session => {
+        if (session.id === currentSessionId) {
+          return {
+            ...session,
+            messages: [...session.messages, userMessage, errorMessage],
+            updatedAt: Date.now()
+          };
+        }
+        return session;
+      }));
+
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  }, [currentSessionId, setSessions, createNewSession, sessions]);
 
   return {
     sessions,
