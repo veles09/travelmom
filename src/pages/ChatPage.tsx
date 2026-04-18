@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import { 
-  Send, Plus, Trash2, MessageSquare, MapPin, 
-  Star, ArrowRight, Sparkles, Loader2, Menu
+  Send, Plus, Trash2, MessageSquare, 
+  Sparkles, Loader2, Menu 
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useChat } from '@/hooks/useChat';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Card, CardContent } from '@/components/ui/card';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
-import type { TourOption } from '@/types';
+//import type { TourOption } from '@/types';
 
 export function ChatPage() {
   // 1. Подключаем наш умный хук (теперь внутри компонента)
@@ -26,7 +25,7 @@ export function ChatPage() {
 
   // 2. Оставляем только те стейты, которых нет в хуке
   const [input, setInput] = useState('');
-  const [currentTours, setCurrentTours] = useState<TourOption[]>([]);
+  //const [currentTours, setCurrentTours] = useState<TourOption[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -43,12 +42,12 @@ export function ChatPage() {
     if (!messageText) setInput('');
 
     // Вызываем реальный запрос к Яндексу
-    const tours = await sendMessage(text);
+    await sendMessage(text);
     
     // Если ИИ когда-нибудь вернет туры, мы их отобразим
-    if (tours && tours.length > 0) {
-      setCurrentTours(tours);
-    }
+    //if (tours && tours.length > 0) {
+    //  setCurrentTours(tours);
+    //}
   };
 
   const formatDate = (timestamp: number) => {
