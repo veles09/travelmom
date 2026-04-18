@@ -33,6 +33,7 @@ export function useChat() {
   }, [setSessions, currentSessionId]);
 
 const sendMessage = useCallback(async (content: string) => {
+  alert('Запрос пошел!');
     // Определяем ID сессии (берем текущую или создаем новую)
     let sessionId = currentSessionId;
     if (!sessionId) {
