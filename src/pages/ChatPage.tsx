@@ -31,7 +31,9 @@ export function ChatPage() {
 
   // Автопрокрутка вниз при новых сообщениях
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   }, [currentSession?.messages]);
 
   // 3. Исправленная функция отправки
