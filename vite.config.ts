@@ -12,4 +12,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://travelmom-git-ai-assistant-antons-projects-3f6ccd12.vercel.app',
+        changeOrigin: true,
+      }
+    }
+  }
 });
