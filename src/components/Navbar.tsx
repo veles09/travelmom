@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, MessageCircle, Map, BookOpen, Home } from 'lucide-react';
+import { Menu, MessageCircle, Map, BookOpen, Home, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
@@ -61,6 +61,17 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              to="/admin"
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
+                isActive('/admin')
+                  ? 'bg-purple-600 text-white shadow-sm'
+                  : 'text-gray-700 hover:bg-purple-50 hover:text-purple-700'
+              }`}
+            >
+              <Settings className="w-4 h-4" />
+              Админ
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -108,6 +119,19 @@ export function Navbar() {
                     {item.label}
                   </Link>
                 ))}
+                
+                <Link
+                  to="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all ${
+                    isActive('/admin')
+                      ? 'bg-purple-100 text-purple-800 border border-purple-200'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
+                >
+                  <Settings className="w-5 h-5" />
+                  Админ-панель
+                </Link>
                 
                 <Link to="/chat" onClick={() => setIsOpen(false)}>
                   <Button className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl mt-4 shadow-md">

@@ -1,17 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { blogPosts } from '@/data/blog';
+import { blogPosts as initialPosts } from '@/data/blog';
 
+const STORAGE_KEY = 'blog_posts';
 const categories = ['Все', 'Советы', 'Подборки', 'Рейтинги', 'Чек-листы'];
 
 export function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Все');
+  const [blogPosts, setBlogPosts] = useState(initialPosts);
+
+  // Загружаем посты из localStorage при монтировании
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setBlogPosts(parsed);
+      } catch (e) {
+        console.error('Failed to parse stored posts', e);
+      }
+    }
+  }, []);
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
