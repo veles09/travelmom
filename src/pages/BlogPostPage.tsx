@@ -60,6 +60,16 @@ export function BlogPostPage() {
             <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
               {post.title}
             </h1>
+            <div className="flex gap-2 mb-4">
+              <Button variant="outline" size="sm" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+                <Bookmark className="w-4 h-4 mr-2" />
+                Сохранить
+              </Button>
+              <Button variant="outline" size="sm" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+                <Share2 className="w-4 h-4 mr-2" />
+                Поделиться
+              </Button>
+            </div>
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag, i) => (
                 <span key={i} className="text-white/70 text-sm">#{tag}</span>
@@ -208,23 +218,21 @@ export function BlogPostPage() {
                 </CardContent>
               </Card>
             )}
-
-            {/* Actions */}
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1 rounded-xl">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Поделиться
-                  </Button>
-                  <Button variant="outline" className="flex-1 rounded-xl">
-                    <Bookmark className="w-4 h-4 mr-2" />
-                    Сохранить
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
           </div>
+        </div>
+      </div>
+
+      {/* Action Buttons at Bottom */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex justify-center gap-2">
+          <Button variant="outline" size="lg" className="rounded-xl">
+            <Bookmark className="w-5 h-5 mr-2" />
+            Сохранить
+          </Button>
+          <Button variant="outline" size="lg" className="rounded-xl">
+            <Share2 className="w-5 h-5 mr-2" />
+            Поделиться
+          </Button>
         </div>
       </div>
     </div>
