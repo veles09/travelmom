@@ -115,7 +115,7 @@ export function ChatPage() {
         </div>
 
         {/* Messages */}
-        <ScrollArea className="flex-1 p-4 md:p-6">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6">
           {!currentSessionId ? (
             <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto space-y-4">
               <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center">
@@ -159,7 +159,7 @@ export function ChatPage() {
               <div ref={messagesEndRef} />
             </div>
           )}
-        </ScrollArea>
+        </div>
 
         {/* Input Area */}
         <div className="p-4 border-t bg-slate-50/50 md:rounded-b-2xl">
