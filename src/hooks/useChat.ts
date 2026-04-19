@@ -33,7 +33,6 @@ export function useChat() {
   }, [setSessions, currentSessionId]);
 
 const sendMessage = useCallback(async (content: string) => {
-  alert('Запрос пошел!');
     // Определяем ID сессии (берем текущую или создаем новую)
     let sessionId = currentSessionId;
     if (!sessionId) {
@@ -68,12 +67,16 @@ const sendMessage = useCallback(async (content: string) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          // Передаем текущее сообщение
+          // Передаем сообщения в правильном формате для Yandex API
           messages: [{ role: 'user', text: content }] 
         }),
       });
 
-      if (!response.ok) throw new Error('Ошибка сервера');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Server error details:', errorData);
+        throw new Error(errorData.details || 'Ошибка сервера');
+      }
       
       const data = await response.json();
 
@@ -102,6 +105,23 @@ const sendMessage = useCallback(async (content: string) => {
 
     } catch (error) {
       console.error("Ошибка при запросе к ИИ:", error);
+      // Добавляем сообщение об ошибке в чат
+      const errorMessage: ChatMessage = {
+        id: generateId(),
+        role: 'assistant',
+        content: "Произошла ошибка при подключении к AI. Пожалуйста, попробуйте позже.",
+        timestamp: Date.now()
+      };
+      setSessions(prev => prev.map(session => {
+        if (session.id === sessionId) {
+          return {
+            ...session,
+            messages: [...session.messages, errorMessage],
+            updatedAt: Date.now()
+          };
+        }
+        return session;
+      }));
       return [];
     } finally {
       setIsLoading(false);

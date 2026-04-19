@@ -1,51 +1,64 @@
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
+# Dependencies
+node_modules/
+
+# Build outputs
 dist/
 build/
-*.class
-*.exe
-*.dll
-*.so
-*.a
-*.out
+*.js.map
+*.ts.map
 
-# Dependencies
-.venv/
-venv/
-node_modules/
-.mypy_cache/
-.pytest_cache/
-target/
-.gradle/
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-
-# Environment
+# Environment variables
 .env
 .env.local
 *.env.*
 
-# Editors
+# IDE specific
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# System files
-.DS_Store
-Thumbs.db
+# Logs
+*.log
 
 # Coverage
 coverage/
 htmlcov/
-.coverage
+*.coverage
 
-# Compressed files
+# Temporary files
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Python specific (if applicable)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-selfcheck.json
+.tox/
+.coverage
+.pytest_cache/
+.mypy_cache/
+
+# Node specific (if applicable)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+jspm_packages/
+
+# Vite specific
+!.vite/
+.vite/
+
+# General archives
 *.zip
 *.gz
 *.tar

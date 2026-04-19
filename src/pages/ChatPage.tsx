@@ -58,7 +58,7 @@ export function ChatPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] bg-slate-50 overflow-hidden">
+    <div className="flex h-screen pt-16 bg-slate-50 overflow-hidden">
       {/* Sidebar - Desktop */}
       <aside className="hidden md:flex w-64 flex-col border-r bg-white">
         <div className="p-4">
@@ -99,7 +99,7 @@ export function ChatPage() {
       </aside>
 
       {/* Main Chat Area */}
-      <main className="flex-1 flex flex-col min-w-0 bg-white md:m-4 md:rounded-2xl md:shadow-sm border">
+      <main className="flex-1 flex flex-col min-w-0 bg-white md:m-4 md:rounded-2xl md:shadow-sm border md:h-[calc(100vh-8rem)] h-[calc(100vh-4rem)]">
         {/* Mobile Header */}
         <div className="md:hidden flex items-center justify-between p-4 border-b">
           <div className="flex items-center gap-2">
