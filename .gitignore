@@ -1,1 +1,29 @@
-Nothing needs to be added to .gitignore since only a source file (.tsx) was modified and no build artifacts, dependencies, or temporary files were present in the changes.
+```
+# Dependencies
+node_modules/
+dist/
+package-lock.json
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build outputs
+build/
+target/
+```

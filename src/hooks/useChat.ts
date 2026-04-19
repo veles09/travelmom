@@ -36,7 +36,16 @@ const sendMessage = useCallback(async (content: string) => {
     // Определяем ID сессии (берем текущую или создаем новую)
     let sessionId = currentSessionId;
     if (!sessionId) {
-      sessionId = createNewSession();
+      const newSession: ChatSession = {
+        id: generateId(),
+        title: 'Новый разговор',
+        messages: [],
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      };
+      setSessions(prev => [newSession, ...prev]);
+      sessionId = newSession.id;
+      setCurrentSessionId(newSession.id);
     }
 
     const userMessage: ChatMessage = {
@@ -126,7 +135,7 @@ const sendMessage = useCallback(async (content: string) => {
     } finally {
       setIsLoading(false);
     }
-  }, [currentSessionId, setSessions, createNewSession]);
+  }, [setSessions, setCurrentSessionId]);
 
   return {
     sessions,
