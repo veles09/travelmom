@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, MessageCircle, Map, BookOpen, Home } from 'lucide-react';
+import { Menu, MessageCircle, Map, BookOpen, Home, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
@@ -9,6 +9,10 @@ const navItems = [
   { path: '/chat', label: 'AI-чат', icon: MessageCircle },
   { path: '/routes', label: 'Маршруты', icon: Map },
   { path: '/blog', label: 'Блог', icon: BookOpen },
+];
+
+const adminNavItems = [
+  { path: '/admin/blog/new', label: 'Добавить статью', icon: Settings },
 ];
 
 export function Navbar() {
@@ -61,6 +65,25 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
+            {/* Admin Menu */}
+            <div className="relative group ml-2">
+              <button className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-all flex items-center gap-1">
+                <Settings className="w-4 h-4" />
+                Админ
+              </button>
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                {adminNavItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="flex items-center gap-2 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg transition-all"
+                  >
+                    <item.icon className="w-4 h-4" />
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* CTA Button */}
@@ -108,6 +131,26 @@ export function Navbar() {
                     {item.label}
                   </Link>
                 ))}
+                
+                {/* Admin Section */}
+                <div className="pt-4 mt-4 border-t">
+                  <p className="px-4 text-xs font-medium text-gray-500 uppercase mb-2">Админ панель</p>
+                  {adminNavItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all ${
+                        isActive(item.path)
+                          ? 'bg-green-100 text-green-800 border border-green-200'
+                          : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
                 
                 <Link to="/chat" onClick={() => setIsOpen(false)}>
                   <Button className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl mt-4 shadow-md">
